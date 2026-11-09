@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Admin - Talleres - MiTaller')}"></head>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container py-4 flex-grow-1">
+    <h2 class="mb-4"><i class="bi bi-gear"></i> Gestión de Talleres</h2>
+
+    <div class="mb-3">
+        <a href="/admin/talleres/nuevo" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Taller
+        </a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Localidad</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="taller : ${talleres}">
+            <td th:text="${taller.nombre}"></td>
+            <td th:text="${taller.localidad}"></td>
+            <td th:text="${taller.telefono}"></td>
+            <td>
+                <span th:if="${taller.activo}" class="badge bg-success">Activo</span>
+                <span th:unless="${taller.activo}" class="badge bg-danger">Inactivo</span>
+            </td>
+            <td>
+                <a th:href="@{/admin/talleres/{id}/editar(id=${taller.id})}"
+                   class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil"></i> Editar
+                </a>
+                <form th:action="@{/admin/talleres/{id}/toggle(id=${taller.id})}"
+                      method="post" class="d-inline">
+                    <button type="submit" class="btn btn-sm"
+                            th:classappend="${taller.activo ? 'btn-danger' : 'btn-success'}">
+                        <span th:text="${taller.activo ? 'Desactivar' : 'Activar'}"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<div th:replace="~{fragments/layout :: scripts}"></div>
+</body>
+</html>

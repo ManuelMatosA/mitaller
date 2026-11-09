@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('MiTaller - Iniciar sesión')}"></head>
+<body class="bg-light d-flex align-items-center min-vh-100">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="text-center mb-4">
+                <h1 class="fw-bold"><i class="bi bi-wrench-adjustable-circle text-primary"></i> MiTaller</h1>
+                <p class="text-muted">Tu taller de confianza, a un clic</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-3">Iniciar sesión</h4>
+                    <div th:if="${error}" class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> <span th:text="${error}">Error</span></div>
+                    <div th:if="${mensaje}" class="alert alert-success"><i class="bi bi-check-circle"></i> <span th:text="${mensaje}">Mensaje</span></div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="username" name="username" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>
+                    </form>
+                    <div class="text-center">
+                        <small class="text-muted">¿No tienes cuenta? <a th:href="@{/registro}">Regístrate aquí</a></small>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3"><small class="text-muted">Demo: <code>manuel</code> / <code>123456</code></small></div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/layout :: scripts}"></div>
+</body>
+</html>

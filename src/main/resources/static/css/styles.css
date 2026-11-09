@@ -1,0 +1,9 @@
+/* MiTaller - Estilos */
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+.card { transition: transform 0.2s ease, box-shadow 0.2s ease; border-radius: 12px; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.min-vh-100 .card:hover { transform: none; }
+.navbar-brand { font-size: 1.3rem; }
+.hero-section { min-height: 350px; display: flex; align-items: center; }
+.form-control:focus, .form-select:focus { border-color: #0f3460; box-shadow: 0 0 0 0.2rem rgba(15,52,96,0.15); }
+.badge { font-weight: 500; }

@@ -1,0 +1,42 @@
+# ===== Compilado =====
+target/
+*.class
+*.jar
+*.war
+
+# ===== Base de datos H2 (datos locales) =====
+data/
+*.db
+*.mv.db
+*.trace.db
+
+# ===== IntelliJ IDEA =====
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# ===== VS Code =====
+.vscode/
+
+# ===== Eclipse =====
+.project
+.classpath
+.settings/
+.factorypath
+
+# ===== Maven Wrapper (opcional, pero mejor subirlo) =====
+# .mvn/
+# mvnw
+# mvnw.cmd
+
+# ===== Logs =====
+*.log
+logs/
+
+# ===== macOS =====
+.DS_Store
+
+# ===== Spring Boot =====
+HELP.md

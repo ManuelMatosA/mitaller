@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Admin - Citas - MiTaller')}"></head>
+<body class="d-flex flex-column min-vh-100">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container py-4 flex-grow-1">
+    <h2 class="mb-4"><i class="bi bi-gear"></i> Gestión de citas</h2>
+
+    <div th:if="${mensaje}" class="alert alert-success"><span th:text="${mensaje}"></span></div>
+
+    <div th:if="${#lists.isEmpty(citas)}" class="text-center py-5 text-muted">
+        <h4>No hay citas registradas</h4>
+    </div>
+
+    <div class="table-responsive" th:unless="${#lists.isEmpty(citas)}">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Taller</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Servicio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cita : ${citas}">
+                    <td th:text="${cita.usuario.nombreCompleto}">Cliente</td>
+                    <td th:text="${cita.taller.nombre}">Taller</td>
+                    <td th:text="${#temporals.format(cita.fecha, 'dd/MM/yyyy')}">Fecha</td>
+                    <td th:text="${cita.hora}">Hora</td>
+                    <td th:text="${cita.tipoServicio}">Servicio</td>
+                    <td>
+                        <span class="badge"
+                              th:classappend="${cita.estado.name() == 'PENDIENTE'} ? 'bg-warning text-dark' :
+                                             (${cita.estado.name() == 'CONFIRMADA'} ? 'bg-success' :
+                                             (${cita.estado.name() == 'CANCELADA'} ? 'bg-danger' : 'bg-info'))"
+                              th:text="${cita.estado.displayName}">Estado</span>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/citas/{id}/estado(id=${cita.id})}" method="post" class="d-inline">
+                            <select name="estado" class="form-select form-select-sm d-inline" style="width: auto;"
+                                    onchange="this.form.submit()">
+                                <option value="">Cambiar...</option>
+                                <option value="CONFIRMADA">Confirmar</option>
+                                <option value="CANCELADA">Cancelar</option>
+                                <option value="COMPLETADA">Completar</option>
+                                <option value="PENDIENTE">Pendiente</option>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<div th:replace="~{fragments/layout :: scripts}"></div>
+</body>
+</html>
